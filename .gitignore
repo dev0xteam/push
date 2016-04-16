@@ -28,3 +28,15 @@
 *.app
 
 a
+
+exec
+
+exec
+
+exec
+
+*.xcindexdb
+
+*.xcindexdb-wal
+
+*.strings-dir

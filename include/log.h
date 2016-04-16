@@ -6,6 +6,8 @@
 //  Copyright © 2016 Siddhant Khanna. All rights reserved.
 //
 
+
+
 void log(str in ){ //Logging functiom
     
     str echo="echo ";
@@ -18,6 +20,7 @@ void log(str in ){ //Logging functiom
 
 
 void system(str *a, str *b){
+    concatenate(*a," ");
     concatenate(*a,*b);
     system(*a);
 }
@@ -25,18 +28,24 @@ void system(str *a, str *b){
 
 int console_main(str user){ //Console
     
+    cbreak();
     int enter = 0;
     log("Inside Console");
+    log("Loading Project Env");
     str input;
     int to_sys;
     int logout = 0;
     keypad(stdscr, TRUE);
-    raw();				
     log("Consol Ready to Go");
-    system("sudo su c exit");
+    system("sudo echo Root!");
     for(enter>=0;enter<4096;enter++){
-        to_sys=0;
-        printf(user);
+        to_sys=0;refresh();
+        if(user_cfg==0){
+            printf(user);
+        }
+        if(user_cfg!=0){
+            printf(def.user);
+        }
         printf(":~");
         gets(input);
        
@@ -44,19 +53,37 @@ int console_main(str user){ //Console
             puts("A Project Management Console");
             to_sys=1;
             }
+        if(strcmp(input, "save_")==0){
+            to_sys=1;
+            }
+        
         if(strcmp(input, "new_ws")==0){
-            log("Setting a new project");
+            def._init();
+            printf("Project Name : ");
+            gets(input);
+            if(user_cfg!=0){
+                def.newfs(input,def.user);
+            }
+
             to_sys=1;
+            
         }
+        
+        
         if(strcmp(input, "exit")==0){
-            system("killall exec");
+            def.cleanup_f();
             to_sys=1;
         }
         
         
-        if(to_sys==0){system(input);}
+        if(to_sys==0){
+            str to_sys_i = "cd ";
+            str ts2 = ";";
+            if(user_cfg==0){system(input);}
+            if(user_cfg!=0){concatenate(to_sys_i,full_path_to_prj,";");system(to_sys_i,input);}
+            
+        }
     }
-    
     return(enter);
 }
 
