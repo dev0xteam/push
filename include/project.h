@@ -28,10 +28,13 @@ class base {  //Actual Stuff related to project
         
         log("Ready to make image!");
         system("dd if=/dev/zero of=./filesystem  bs=1M count=102400");
+        system("mkdir -p /media/mountPoint");
+	system("mkfs.ext4 ~/filesystem");
         log("Finished creating new fs image");
         return 0;
     }
         void _init(str name,int size,str fs){
+	  system("mount -o loop ~/filesystem /media/mountPoint");
             //To mount,Format, and set image data
             //Inclomlete
             
