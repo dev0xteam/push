@@ -44,6 +44,10 @@ int console_main(str user){ //Console
             puts("A Project Management Console");
             to_sys=1;
             }
+        if(strcmp(input, "new_ws")==0){
+            log("Setting a new project");
+            to_sys=1;
+        }
         if(strcmp(input, "exit")==0){
             system("killall exec");
             to_sys=1;
