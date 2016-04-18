@@ -34,7 +34,7 @@ void system(str *a, str *b){
 }
 
 
-int console_main(str user){ //Console
+int console_main(str user,int sys){ //Console
     
     
     int enter = 0;
