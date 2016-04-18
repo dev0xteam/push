@@ -7,6 +7,14 @@
 //
 
 
+void help(){
+printf("new_ws   -   New Workspace\n");
+printf("save_    -   Save Current Workspace\n");
+printf("zip      -   Pack workspace\n");
+printf("exit     -    Exit\n");
+printf("?        -     This Message\n");
+}
+
 
 void log(str in ){ //Logging functiom
     
@@ -28,18 +36,20 @@ void system(str *a, str *b){
 
 int console_main(str user){ //Console
     
-    cbreak();
+    
     int enter = 0;
     log("Inside Console");
     log("Loading Project Env");
     str input;
+    str prj = "";
     int to_sys;
     int logout = 0;
     keypad(stdscr, TRUE);
     log("Consol Ready to Go");
     system("sudo echo Root!");
-    for(enter>=0;enter<4096;enter++){
-        to_sys=0;refresh();
+    for(enter==0;enter<4096;enter++){
+        to_sys=0;
+    
         if(user_cfg==0){
             printf(user);
         }
@@ -48,6 +58,12 @@ int console_main(str user){ //Console
         }
         printf(":~");
         gets(input);
+        
+        if(strcmp(input,"?")==0){
+            
+            help();
+            to_sys=1;
+        }
        
         if(strcmp(input, "term")==0){
             puts("A Project Management Console");
@@ -57,10 +73,19 @@ int console_main(str user){ //Console
             to_sys=1;
             }
         
+        if(strcmp(input,"config user")==0){
+            
+            printf("@");
+            printf(user);
+            
+        }
+        
         if(strcmp(input, "new_ws")==0){
             def._init();
             printf("Project Name : ");
             gets(input);
+            
+            concatenate(prj,input);
             if(user_cfg!=0){
                 def.newfs(input,def.user);
             }
@@ -77,10 +102,11 @@ int console_main(str user){ //Console
         
         
         if(to_sys==0){
+            to_sys=sys;
             str to_sys_i = "cd ";
             str ts2 = ";";
             if(user_cfg==0){system(input);}
-            if(user_cfg!=0){concatenate(to_sys_i,full_path_to_prj,";");system(to_sys_i,input);}
+            if(user_cfg!=0){concatenate(to_sys_i,full_path_to_prj);concatenate(to_sys_i,";");system(to_sys_i,input);}
             
         }
     }
@@ -90,31 +116,29 @@ int console_main(str user){ //Console
 
 class console{  //incomplete console stuff
 public:
-  const str sh = "bash ";
-  const str echo = "echo ";
-  const str disk = "hdut ";
-  const str xar = "cxar ";
-  const str tar = "ctar ";
-  const str bzip = "bzip ";
-  const str install = "inst ";
-  const str nimage = "newi ";
-  
+    char* comms[10];
     
-    char  *input(str *in){
-        str path ;
-        char *y=path;
+    
+    
+    int to_sys = 0;
+    
+    
+    
+    
+    
+    
+    int str_parse(str in){
         
-        y = cut(*in,5);
         
-        return y;
+        
+         console_main(in,to_sys);
+        
     }
-    
-    
 
     
     console(str _user){
         
-        console_main(_user);
+        console_main(_user,to_sys);
         }
         
     

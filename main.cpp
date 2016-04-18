@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <stdio.h>
 #include <ncurses.h>
 #include "include/prop.h" //OS Dependent funtions .. Rewritten
 #include "include/project.h"//Class for project
@@ -29,7 +30,7 @@ void rootval(){
 
 
 int main() {
-    log("Loding console");
+    log("Loading console");
     create_listener();
     console user("user");
     log("Admin init complete.");

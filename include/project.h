@@ -8,7 +8,7 @@
 
 #include<fstream>
 int user_cfg = 0;
-str full_path_to_prj = "";
+
 
 //std::ofstream out;
 
@@ -30,7 +30,10 @@ public:
     }
     
     int newfs(str n,str c){
+        
         concatenate(name,n);
+        concatenate(full_path_to_prj,n);
+      //concatenate(prj,n);
         concatenate(new_fs,n);
         system(new_fs);
         return 0;
@@ -43,7 +46,7 @@ public:
         str tmp2 = " ~/";
         str _zip = ".zip";
         str rm_volumes = "sudo rm -rf /Volumes/";
-        concatenate(rm_volumes,name);
+        concatenate(rm_volumes,name,"/");
         concatenate(tmp1,name,tmp2);
         concatenate(tmp1,_zip);
         system(tmp1);
@@ -73,8 +76,9 @@ public:
             //...
             printf("Username : ");
             gets(user);
-            concatenate(full_path_to_prj,Volumes,name);
-            concatenate(full_path_to_prj,"/");
+            concatenate(full_path_to_prj,Volumes);
+        //  concatenate(full_path_to_prj,"/");
+            printf(full_path_to_prj);
             user_cfg++;
             
         }

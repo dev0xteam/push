@@ -6,13 +6,15 @@
 //  Copyright © 2016 Siddhant Khanna. All rights reserved.
 //
 
-
 /**/
+
 
 typedef char str[64];
 
 typedef int arr[128];
 
+
+str full_path_to_prj = "";
 
 void concatenate(char p[], char q[]) {
     
