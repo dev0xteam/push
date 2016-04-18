@@ -1,1 +1,1 @@
-gcc main.cpp -o exec
+gcc main.cpp -lncurses -o exec
